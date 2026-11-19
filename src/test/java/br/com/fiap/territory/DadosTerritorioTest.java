@@ -13,10 +13,10 @@ class DadosTerritorioTest {
 
     @Test
     void deveInicializarLimiaresPadrao() {
-        // Arrange
+
         DadosTerritorio dados = new DadosTerritorio("4321");
 
-        // Act
+
         double atencao = dados.getLimiarAtencao(
                 TipoSensor.TEMPERATURA
         );
@@ -29,7 +29,7 @@ class DadosTerritorioTest {
                 TipoSensor.TEMPERATURA
         );
 
-        // Assert
+
         assertEquals(30.0, atencao);
         assertEquals(34.0, alerta);
         assertEquals(38.0, critico);
@@ -40,7 +40,7 @@ class DadosTerritorioTest {
         // Arrange
         DadosTerritorio dados = new DadosTerritorio("4321");
 
-        // Act e Assert
+
         assertEquals(
                 NivelAlerta.NORMAL,
                 dados.avaliarNivel(TipoSensor.TEMPERATURA, 29.9)
@@ -64,25 +64,25 @@ class DadosTerritorioTest {
 
     @Test
     void deveClassificarCargaDaRede() {
-        // Arrange
+
         DadosTerritorio dados = new DadosTerritorio("4321");
 
-        // Act
+
         NivelAlerta nivel = dados.avaliarNivel(
                 TipoSensor.CARGA_REDE,
                 97.0
         );
 
-        // Assert
+
         assertEquals(NivelAlerta.CRITICO, nivel);
     }
 
     @Test
     void devePermitirAlteracaoComCodigoCorreto() {
-        // Arrange
+
         DadosTerritorio dados = new DadosTerritorio("4321");
 
-        // Act
+
         dados.alterarLimiares(
                 TipoSensor.TEMPERATURA,
                 28.0,
@@ -91,7 +91,7 @@ class DadosTerritorioTest {
                 "4321"
         );
 
-        // Assert
+
         assertEquals(
                 28.0,
                 dados.getLimiarAtencao(TipoSensor.TEMPERATURA)
@@ -110,10 +110,10 @@ class DadosTerritorioTest {
 
     @Test
     void deveBloquearAlteracaoComCodigoIncorreto() {
-        // Arrange
+
         DadosTerritorio dados = new DadosTerritorio("4321");
 
-        // Act e Assert
+
         assertThrows(
                 DadosInvalidosException.class,
                 () -> dados.alterarLimiares(
@@ -133,10 +133,10 @@ class DadosTerritorioTest {
 
     @Test
     void deveRejeitarLimiaresForaDeOrdem() {
-        // Arrange
+
         DadosTerritorio dados = new DadosTerritorio("4321");
 
-        // Act e Assert
+
         assertThrows(
                 DadosInvalidosException.class,
                 () -> dados.alterarLimiares(
@@ -158,10 +158,10 @@ class DadosTerritorioTest {
 
     @Test
     void deveRejeitarLimiaresNaoFinitos() {
-        // Arrange
+
         DadosTerritorio dados = new DadosTerritorio("4321");
 
-        // Act e Assert
+
         assertThrows(
                 DadosInvalidosException.class,
                 () -> dados.alterarLimiares(
@@ -187,10 +187,10 @@ class DadosTerritorioTest {
 
     @Test
     void deveRejeitarPrevisaoInvalida() {
-        // Arrange
+
         DadosTerritorio dados = new DadosTerritorio("4321");
 
-        // Act e Assert
+
         assertThrows(
                 DadosInvalidosException.class,
                 () -> dados.avaliarNivel(
@@ -210,10 +210,10 @@ class DadosTerritorioTest {
 
     @Test
     void deveRejeitarTipoSensorNulo() {
-        // Arrange
+
         DadosTerritorio dados = new DadosTerritorio("4321");
 
-        // Act e Assert
+
         assertThrows(
                 DadosInvalidosException.class,
                 () -> dados.avaliarNivel(null, 35.0)
@@ -222,7 +222,7 @@ class DadosTerritorioTest {
 
     @Test
     void deveRejeitarCodigoAcessoVazio() {
-        // Arrange, Act e Assert
+
         assertThrows(
                 DadosInvalidosException.class,
                 () -> new DadosTerritorio("")
